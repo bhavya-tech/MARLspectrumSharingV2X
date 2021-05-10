@@ -3,11 +3,16 @@ import random
 import scipy
 import scipy.io
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import Environment_marl_test
 import os
 from replay_memory import ReplayMemory
 import sys
+
+tf.enable_resource_variables()
+tf.disable_eager_execution()
+
+os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
 
 my_config = tf.ConfigProto()
 my_config.gpu_options.allow_growth=True
