@@ -4,7 +4,6 @@ import time
 import random
 import math
 
-
 np.random.seed(1234)
 
 
@@ -86,7 +85,7 @@ class Vehicle:
 
 class Environ:
 
-    def __init__(self, down_lane, up_lane, left_lane, right_lane, width, height, n_veh, n_neighbor):
+    def __init__(self, down_lane, up_lane, left_lane, right_lane, width, height, n_veh, n_neighbor, payload):
         self.down_lanes = down_lane
         self.up_lanes = up_lane
         self.left_lanes = left_lane
@@ -121,7 +120,7 @@ class Environ:
         self.time_slow = 0.1  # update slow fading/vehicle position every 100 ms
         self.bandwidth = int(1e6)  # bandwidth per RB, 1 MHz
         # self.bandwidth = 1500
-        self.demand_size = int((4 * 190 + 300) * 8 * 2)  # V2V payload: 1060 Bytes every 100 ms
+        self.demand_size = int((4 * 190 + 300) * payload)  # V2V payload: 1060 Bytes every 100 ms
         # self.demand_size = 20
 
         self.V2V_Interference_all = np.zeros((self.n_Veh, self.n_neighbor, self.n_RB)) + self.sig2

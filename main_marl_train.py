@@ -3,7 +3,7 @@ import random
 import scipy
 import scipy.io
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import Environment_marl
 import os
 from replay_memory import ReplayMemory

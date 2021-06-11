@@ -3,14 +3,21 @@ import random
 import scipy
 import scipy.io
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import Environment_marl_test
 import os
 from replay_memory import ReplayMemory
 import sys
 
+tf.enable_resource_variables()
+tf.disable_eager_execution()
+
+os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
+
 my_config = tf.ConfigProto()
 my_config.gpu_options.allow_growth=True
+
+
 
 class Agent(object):
     def __init__(self, memory_entry_size):
@@ -479,6 +486,9 @@ if IS_TEST:
         f.write('--------DPRA ------------\n')
         f.write('Dpra Sum V2I rate: ' + str(round(np.average(V2I_rate_list_dpra), 5)) + ' Mbps\n')
         f.write('Dpra Pr(V2V): ' + str(round(np.average(V2V_success_list_dpra), 5)) + '\n')
+        f.write('----Payload----\n')
+        f.write(str(env.demand_size) + '\n')
+
 
     current_dir = os.path.dirname(os.path.realpath(__file__))
     marl_path = os.path.join(current_dir, "model/" + label + '/rate_marl.mat')
