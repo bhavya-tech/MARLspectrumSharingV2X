@@ -8,6 +8,13 @@ import Environment_marl
 import os
 from replay_memory import ReplayMemory
 import sys
+import csv
+
+
+tf.enable_resource_variables()
+tf.disable_eager_execution()
+
+os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
 
 my_config = tf.ConfigProto()
 my_config.gpu_options.allow_growth=True
@@ -159,6 +166,10 @@ def q_learning_mini_batch(current_agent, current_sess):
     """ Training a sampled mini-batch """
 
     batch_s_t, batch_s_t_plus_1, batch_action, batch_reward = current_agent.memory.sample()
+
+    with open('fig5.csv','a') as f:
+        write = csv.writer(f)
+        write.writerow([batch_reward.sum()])
 
     if current_agent.double_q:  # double q-learning
         pred_action = current_sess.run(g_q_action, feed_dict={x: batch_s_t_plus_1})
