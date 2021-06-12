@@ -2,7 +2,7 @@ import numpy as np
 from modified_main_test import a
 import csv
 
-payload = np.arange(1,6,0.5)
+payload = np.arange(1,6)
 
 # Write header
 with open('test2.csv','w') as f:

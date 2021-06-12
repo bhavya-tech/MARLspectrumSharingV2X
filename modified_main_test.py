@@ -297,7 +297,9 @@ def a(demand_size):
         action_all_testing_sarl = np.zeros([n_veh, n_neighbor, 2], dtype='int32')
         action_all_testing_dpra = np.zeros([n_veh, n_neighbor, 2], dtype='int32')
         for idx_episode in range(n_episode_test):
-            print('----- Episode', idx_episode, '-----')
+            
+            if idx_episode%100 == 0:
+                print(demand_size, '----- Episode', idx_episode, '-----')
 
             env.renew_positions()
             env.renew_neighbor()
